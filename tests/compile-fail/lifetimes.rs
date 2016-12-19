@@ -128,5 +128,8 @@ fn elided_input_named_output<'a>(_arg: &str) -> &'a str { unimplemented!() }
 fn trait_bound_ok<'a, T: WithLifetime<'static>>(_: &'a u8, _: T) { unimplemented!() } //~ERROR explicit lifetimes given
 fn trait_bound<'a, T: WithLifetime<'a>>(_: &'a u8, _: T) { unimplemented!() }
 
+// should not warn because it won't build without the lifetime
+fn boxed_trait<'a>(a: &'a u8) -> Box<::std::fmt::Display + 'a> { Box::new(a) }
+
 fn main() {
 }
